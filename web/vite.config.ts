@@ -3,6 +3,9 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
+type PwaManifest = Exclude<NonNullable<Parameters<typeof VitePWA>[0]>['manifest'], false>
+type StudyRoomManifest = PwaManifest & { min_viewport_width: number }
+
 export default defineConfig({
   plugins: [
     react(),
@@ -44,6 +47,7 @@ export default defineConfig({
         description: 'A quiet shared Pomodoro room for focused study sessions.',
         start_url: '/',
         display: 'standalone',
+        min_viewport_width: 360,
         background_color: '#ffffff',
         theme_color: '#d86f4d',
         orientation: 'any',
@@ -51,7 +55,7 @@ export default defineConfig({
           { src: '/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
           { src: '/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' },
         ],
-      },
+      } as StudyRoomManifest,
     }),
   ],
   server: { host: true },
