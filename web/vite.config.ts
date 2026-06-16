@@ -39,13 +39,13 @@ export default defineConfig({
         ],
       },
       manifest: {
-        name: 'study-room',
-        short_name: 'study-room',
-        description: 'Free study-room app — part of FreeAppStore',
+        name: 'Study Room',
+        short_name: 'Study Room',
+        description: 'A quiet shared Pomodoro room for focused study sessions.',
         start_url: '/',
         display: 'standalone',
         background_color: '#ffffff',
-        theme_color: '#111111',
+        theme_color: '#d86f4d',
         orientation: 'any',
         icons: [
           { src: '/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any maskable' },

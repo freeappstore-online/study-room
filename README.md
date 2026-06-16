@@ -1,40 +1,132 @@
-# template-standalone
+# Study Room
 
-The standalone-app template used by [`fas init`](https://github.com/freeappstore-online/platform/tree/main/packages/cli) to scaffold new free apps for [FreeAppStore](https://freeappstore.online).
+A quiet shared Pomodoro room for focused study sessions on [FreeAppStore](https://freeappstore.online).
 
-You almost certainly want to use the CLI, not clone this directly:
+Study Room is designed for small groups who want accountability without a noisy chat or video call. A room gives everyone the same focus/break rhythm, lightweight presence, an async discussion board, private personal tasks, and saved discussion notes that can be exported as Markdown.
+
+- App: `study-room`
+- Subdomain: `study-room.freeappstore.online`
+- License: MIT
+- Tracking: none
+
+## Features
+
+- Create or join a study room by link or room code.
+- Shared Pomodoro timer controlled by the room host.
+- Member presence with `Focus`, `Break`, and `Away` states.
+- Room goal editable by the host.
+- Async discussion board for questions, resources, notes, and other useful posts.
+- Replies on discussion posts.
+- Personal task list stored locally on the user's device.
+- Invite modal with copyable room link and room code.
+- Host-only `Close room`; other members use `Leave`.
+- Room recovery after refresh or accidental tab close.
+- Signed-in rooms use a lightweight shared registry so closed or expired rooms can be detected after reconnect.
+- Saved posts available from the home page, independent of the current room.
+- Select saved posts and copy them as Markdown for external notes.
+
+## Room Lifecycle
+
+Only the host can close a room.
+
+- If the host clicks `Close room`, the app broadcasts a close event and marks the shared room registry as closed when available.
+- If a participant clicks `Leave`, only that participant exits.
+- Accidental tab close, refresh, or short network interruption does not close the room.
+- The host can reopen the app in the same browser and return to the active room from local state.
+- Signed-in rooms use a host heartbeat. If the host does not reconnect within the grace period, the room is treated as expired.
+
+The current host reconnect grace period is 30 minutes.
+
+## Saved Posts
+
+Saved posts are global personal notes, not room-only state.
+
+- Open `Saved posts` from the home page.
+- Save useful discussion posts from the discussion board or post detail modal.
+- Saved posts include the room name, room code, category, title, body, author, timestamps, and replies.
+- While the user remains in the room, saved copies continue syncing with the live post, so new replies are captured.
+- After the room closes, the saved copy remains available.
+- Select saved posts and use `Copy selected Markdown` to paste into a Markdown editor, Word, Notion, Obsidian, or another notes app.
+
+## Tech Stack
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS v4
+- `@freeappstore/sdk`
+- `vite-plugin-pwa`
+
+## Development
+
+Install dependencies:
 
 ```bash
-npm i -g @freeappstore/cli
-fas init my-app
+pnpm install
 ```
 
-The CLI clones this template, replaces every `freeappstore` placeholder with your app id, runs `git init`, and makes the first commit — the result is a runnable app you can `pnpm dev` immediately.
-
-## What's in here
-
-- `web/` — Vite + React + TypeScript app, ESM-only, no Tailwind config needed (utility classes via inline styles + the `Shell` component).
-- `web/src/components/Shell.tsx` — sidebar layout with brand fonts (Manrope + Fraunces), CSS variables (`--paper`, `--ink`, `--accent`), and dark-mode support out of the box.
-- `web/src/main.tsx` — React entry point.
-- `web/index.html` — links Manrope + Fraunces, sets PWA meta tags, references the manifest.
-- `web/public/manifest.json` — PWA manifest with `name`, `display`, `start_url`.
-- `package.json` — pnpm workspace, `dev` / `build` / `typecheck` / `test` scripts.
-- `.github/workflows/compliance.yml` — runs the same checks as `fas check` on every PR. Source of truth lives in the [`@freeappstore/compliance`](https://www.npmjs.com/package/@freeappstore/compliance) package.
-
-## Cloning manually (not recommended)
-
-If you really want to scaffold by hand:
+Run the app locally:
 
 ```bash
-git clone https://github.com/freeappstore-online/template-standalone my-app
-cd my-app
-# Replace freeappstore → my-app in package.json, web/index.html, web/src/main.tsx, README, etc.
-rm -rf .git && git init
-pnpm install && pnpm dev
+pnpm dev
 ```
 
-Then run `fas publish` to provision repo + hosting + DNS, or open the [submission form](https://github.com/freeappstore-online/submissions/issues/new) for maintainer review.
+Build for production:
+
+```bash
+pnpm build
+```
+
+Run type checks:
+
+```bash
+pnpm typecheck
+```
+
+Preview the production build:
+
+```bash
+pnpm preview
+```
+
+## Project Structure
+
+```text
+web/
+  index.html
+  package.json
+  src/
+    App.tsx
+    index.css
+    main.tsx
+    types.ts
+    hooks/
+      useRoomChannel.ts
+      useStoredState.ts
+```
+
+## Data And Privacy
+
+Study Room does not add tracking.
+
+Guest rooms work with local browser state and real-time room messages. Signed-in rooms can use FreeAppStore services for cross-device live room messaging and the shared room registry used to detect closed or expired rooms.
+
+Saved posts and personal tasks are personal data. The current implementation stores them in browser local storage.
+
+## User Guide
+
+See [USER_GUIDE.md](./USER_GUIDE.md) for a step-by-step guide to creating rooms, joining rooms, posting discussions, saving posts, and exporting Markdown.
+
+## Deployment
+
+Deployment follows the FreeAppStore repository convention:
+
+```bash
+git push origin main
+```
+
+The production deployment is handled by GitHub Actions.
 
 ## License
 
-MIT.
+MIT. See [LICENSE](./LICENSE).
