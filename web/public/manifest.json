@@ -1,0 +1,26 @@
+{
+  "name": "Study Room",
+  "short_name": "Study Room",
+  "description": "A quiet shared Pomodoro room for focused study sessions.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#d86f4d",
+  "orientation": "any",
+  "min_viewport_width": 360,
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

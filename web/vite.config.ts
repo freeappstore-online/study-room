@@ -12,6 +12,7 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
+      manifestFilename: 'manifest.json',
       workbox: {
         globPatterns: ['**/*.{js,css,html,png,svg,ico,woff2,wasm,json}'],
         maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
