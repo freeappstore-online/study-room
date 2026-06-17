@@ -1235,6 +1235,7 @@ function RoomExperience({
         connectionState={connectionState}
         authenticated={authenticated}
         onInvite={() => setInviteOpen(true)}
+        onBoard={() => setPage('board')}
         onTasks={() => setPage('tasks')}
         onExit={exitCurrentRoom}
         isHost={isHost}
@@ -1345,6 +1346,7 @@ function RoomHeader({
   authenticated,
   isHost,
   onInvite,
+  onBoard,
   onTasks,
   onExit,
 }: {
@@ -1353,6 +1355,7 @@ function RoomHeader({
   authenticated: boolean
   isHost: boolean
   onInvite: () => void
+  onBoard: () => void
   onTasks: () => void
   onExit: () => void
 }) {
@@ -1384,6 +1387,10 @@ function RoomHeader({
         <button className="button button-secondary" onClick={onInvite} aria-label="Invite friends">
           <Share2 size={16} />
           <span>Invite</span>
+        </button>
+        <button className="button button-secondary board-action" onClick={onBoard}>
+          <MessageCircle size={16} />
+          <span>Board</span>
         </button>
         <button className="button button-quiet desktop-action" onClick={onTasks}>
           <ListTodo size={16} />

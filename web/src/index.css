@@ -700,6 +700,10 @@ button:disabled {
   gap: 0.7rem;
 }
 
+.board-action {
+  display: none;
+}
+
 .room-mark {
   width: 42px;
   height: 42px;
@@ -2043,6 +2047,10 @@ button:disabled {
     display: none;
   }
 
+  .board-action {
+    display: inline-flex;
+  }
+
   .timer-panel {
     border-right: 0;
   }
@@ -2120,6 +2128,7 @@ button:disabled {
   }
 
   .desktop-action,
+  .board-action,
   .room-actions .button span {
     display: none;
   }
