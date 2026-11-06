@@ -1,0 +1,6 @@
+{
+  "appId": "study-room",
+  "applicationRoot": "web",
+  "outputPath": "web/dist",
+  "buildCommand": "pnpm build"
+}
