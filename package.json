@@ -1,10 +1,19 @@
 {
   "name": "study-room",
   "private": true,
-  "packageManager": "pnpm@9.15.4",
-  "engines": { "node": ">=22" },
-  "pnpm": { "onlyBuiltDependencies": ["esbuild"] },
-  "repository": { "type": "git", "url": "git+https://github.com/freeappstore-online/study-room.git" },
+  "packageManager": "pnpm@10.30.3",
+  "engines": {
+    "node": ">=22"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freeappstore-online/study-room.git"
+  },
   "scripts": {
     "dev": "pnpm --filter @study-room/web dev",
     "build": "pnpm --filter @study-room/web build",
